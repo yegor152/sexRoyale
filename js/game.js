@@ -8,10 +8,11 @@ let ctx = canvas.getContext(`2d`);
 
 let board = [];
 let figures = new Set();
-figures.push(new Rook(2,2,'black'))
+figures.add(new Rook(2,2,'black'))
 
 for(let i=0;i<8;i++){
     board[i] = [];
+    for(let j=0; j<8; j++) board[i][j]=null;
 }
 
 function draw() {
@@ -28,5 +29,5 @@ function draw() {
         ctx.drawImage(figure.img, figure.x,figure.y, figure.width, figure.width);
     }
 }
-let setI = setInterval(draw, 50);
+let setI = setInterval(draw, 500);
 
