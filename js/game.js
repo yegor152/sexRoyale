@@ -5,6 +5,15 @@ canvas.height = document.documentElement.clientHeight*0.9;
 canvas.width = canvas.height;
 let ctx = canvas.getContext(`2d`);
 
+
+let board = [];
+let figures = new Set();
+figures.push(new Rook(2,2,'black'))
+
+for(let i=0;i<8;i++){
+    board[i] = [];
+}
+
 function draw() {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -14,5 +23,10 @@ function draw() {
             if((i+j)%2) ctx.fillRect(j*canvas.width/8,i*canvas.width/8,canvas.width/8, canvas.width/8)
         }
     }
+
+    for(let figure of figures){
+        ctx.drawImage(figure.img, figure.x,figure.y, figure.width, figure.width);
+    }
 }
 let setI = setInterval(draw, 50);
+
