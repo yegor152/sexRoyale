@@ -11,37 +11,37 @@ class Rook{
         this.img = new Image();
         this.img.src = `img/${this.color}Rook.png`;
     }
-    possibleMove(){
+    possibleMoves(){
         let possibleMovesList = [];
         for(let i=this.i+1; i<board.length; i++){
             let curFigure = board[i][this.j];
-            if(!curFigure) possibleMovesList.push([i,this.j])
+            if(!curFigure) possibleMovesList.push({i:i,j: this.j})
             else{
-                if(curFigure && curFigure.color !== this.color) possibleMovesList.push([i,this.j])
+                if(curFigure && curFigure.color !== this.color) possibleMovesList.push({i:i,j: this.j})
                 break;
             }
         }
         for(let i=this.i-1; i>=0; i--){
             let curFigure = board[i][this.j];
-            if(!curFigure) possibleMovesList.push([i,this.j])
+            if(!curFigure) possibleMovesList.push({i: i,j: this.j})
             else{
-                if(curFigure && curFigure.color !== this.color) possibleMovesList.push([i,this.j])
+                if(curFigure && curFigure.color !== this.color) possibleMovesList.push({i:i,j: this.j})
                 break;
             }
         }
         for(let  j=this.j+1; j<board.length; j++){
             let curFigure = board[this.i][j];
-            if(!curFigure) possibleMovesList.push([this.i,j])
+            if(!curFigure) possibleMovesList.push({i: this.i,j: j})
             else{
-                if(curFigure && curFigure.color !== this.color) possibleMovesList.push([this.i,j])
+                if(curFigure && curFigure.color !== this.color) possibleMovesList.push({i:this.i,j:j})
                 break;
             }
         }
         for(let  j=this.j-1; j>=0; j--){
             let curFigure = board[this.i][j];
-            if(!curFigure) possibleMovesList.push([this.i,j])
+            if(!curFigure) possibleMovesList.push({i: this.i,j: j})
             else{
-                if(curFigure && curFigure.color !== this.color) possibleMovesList.push([this.i,j])
+                if(curFigure && curFigure.color !== this.color) possibleMovesList.push({i: this.i,j: j})
                 break;
             }
         }
