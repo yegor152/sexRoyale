@@ -67,7 +67,7 @@ class Bishop {
             if (board[x][y] == null){
                 possibleMovesList.push([x, y])
             }
-            else if  (board[x][y] === this.color){
+            else if  (board[x][y].color === this.color){
                 possibleMovesList.push([x, y])
                 break
             }
@@ -80,7 +80,7 @@ class Bishop {
             if (board[x][y] == null){
                 possibleMovesList.push([x, y])
             }
-            else if  (board[x][y] === this.color){
+            else if  (board[x][y].color === this.color){
                 possibleMovesList.push([x, y])
                 break
             }
@@ -93,7 +93,7 @@ class Bishop {
             if (board[x][y] == null){
                 possibleMovesList.push([x, y])
             }
-            else if  (board[x][y] === this.color){
+            else if  (board[x][y].color === this.color){
                 possibleMovesList.push([x, y])
                 break
             }
@@ -106,7 +106,7 @@ class Bishop {
             if (board[x][y] == null){
                 possibleMovesList.push([x, y])
             }
-            else if  (board[x][y] === this.color){
+            else if  (board[x][y].color === this.color){
                 possibleMovesList.push([x, y])
                 break
             }
@@ -130,7 +130,7 @@ class Knight{
     }
     possibleMoves(){
         let possibleMovesList = []
-        if (this.j + 1 < 8 && this.i + 2 < 8 && board[this.j + 1][this.i + 2].color !== this.color){
+        if (this.j + 1 < 8 && this.i + 2 < 8 &&  board[this.j + 1][this.i + 2].color !== this.color){
             possibleMovesList.push([this.j + 1, this.i + 2])
         }
         if (this.j + 2 < 8 && this.i + 1 < 8 && board[this.j + 2][this.i + 1].color !== this.color){
