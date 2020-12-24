@@ -130,29 +130,53 @@ class Knight{
     }
     possibleMoves(){
         let possibleMovesList = []
-        if (this.j + 1 < 8 && this.i + 2 < 8 &&  board[this.j + 1][this.i + 2].color !== this.color){
-            possibleMovesList.push([this.j + 1, this.i + 2])
+        if (this.j + 1 < 8 && this.i + 2 < 8){
+            if (board[this.j + 1][this.i + 2] && board[this.j + 1][this.i + 2].color !== this.color
+            || !board[this.j + 1][this.i + 2]) {
+                possibleMovesList.push([this.j + 1, this.i + 2])
+            }
         }
-        if (this.j + 2 < 8 && this.i + 1 < 8 && board[this.j + 2][this.i + 1].color !== this.color){
-            possibleMovesList.push([this.j + 2, this.i + 1])
+        if (this.j + 2 < 8 && this.i + 1 < 8){
+            if (board[this.j + 2][this.i + 1] && board[this.j + 2][this.i + 1].color !== this.color
+                || !board[this.j + 2][this.i + 1]) {
+                possibleMovesList.push([this.j + 2, this.i + 1])
+            }
         }
-        if (this.j - 1 >= 0 && this.i - 2 >= 0 && board[this.j - 1][this.i - 2].color !== this.color){
-            possibleMovesList.push([this.j - 1, this.i - 2])
+        if (this.j - 1 >= 0 && this.i - 2 >= 0){
+            if (board[this.j - 1][this.i - 2] && board[this.j - 1][this.i - 2].color !== this.color
+                || !board[this.j - 1][this.i - 2]) {
+                possibleMovesList.push([this.j - 1, this.i - 2])
+            }
         }
-        if (this.j - 2 >= 0 && this.i - 1 >= 0 && board[this.j - 2][this.i - 1].color !== this.color){
-            possibleMovesList.push([this.j - 2, this.i - 1])
+        if (this.j - 2 >= 0 && this.i - 1 >= 0){
+            if (board[this.j - 2][this.i - 1] && board[this.j - 2][this.i - 1].color !== this.color
+                || !board[this.j - 2][this.i - 1]) {
+                possibleMovesList.push([this.j - 2, this.i - 1])
+            }
         }
-        if (this.j + 1 < 8 && this.i - 2 >= 0 && board[this.j + 1][this.i - 2].color !== this.color){
-            possibleMovesList.push([this.j + 1, this.i - 2])
+        if (this.j + 1 < 8 && this.i - 2 >= 0){
+            if (board[this.j + 1][this.i - 2] && board[this.j + 1][this.i - 2].color !== this.color
+                || !board[this.j + 1][this.i - 2]) {
+                possibleMovesList.push([this.j + 1, this.i - 2])
+            }
         }
-        if (this.j + 2 < 8 && this.i - 1 >= 0 && board[this.j + 2][this.i - 1].color !== this.color){
-            possibleMovesList.push([this.j + 2, this.i - 1])
+        if (this.j + 2 < 8 && this.i - 1 >= 0){
+            if (board[this.j + 2][this.i - 1] && board[this.j + 2][this.i - 1].color !== this.color
+                || !board[this.j + 2][this.i - 1]) {
+                possibleMovesList.push([this.j + 2, this.i - 1])
+            }
         }
-        if (this.j - 1 >= 0 && this.i + 2 < 8 && board[this.j - 1][this.i + 2].color !== this.color){
-            possibleMovesList.push([this.j - 1, this.i + 2])
+        if (this.j - 1 >= 0 && this.i + 2 < 8){
+            if (board[this.j - 1][this.i + 2] && board[this.j - 1][this.i + 2].color !== this.color
+                || !board[this.j - 1][this.i + 2]) {
+                possibleMovesList.push([this.j - 1, this.i + 2])
+            }
         }
-        if (this.j - 2 >= 0 && this.i + 1 < 8 && board[this.j - 2][this.i + 1].color !== this.color){
-            possibleMovesList.push([this.j - 2, this.i + 1])
+        if (this.j - 2 >= 0 && this.i + 1 < 8){
+            if (board[this.j - 2][this.i + 1] && board[this.j - 2][this.i + 1].color !== this.color
+                || !board[this.j - 2][this.i + 1]) {
+                possibleMovesList.push([this.j - 2, this.i + 1])
+            }
         }
         return possibleMovesList
     }
