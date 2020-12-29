@@ -11,7 +11,7 @@ class Rook{
         this.img = new Image();
         this.img.src = `img/${this.color}Rook.png`;
     }
-    possibleMove(){
+    possibleMoves(){
         let possibleMovesList = [];
         for(let i=this.i+1; i<board.length; i++){
             let curFigure = board[i][this.j];
@@ -67,8 +67,10 @@ class Bishop {
             if (board[x][y] == null){
                 possibleMovesList.push({i:x, j:y})
             }
-            else if  (board[x][y].color === this.color){
-                possibleMovesList.push({i:x, j:y})
+            else{
+                if (board[x][y].color !== this.color){
+                    possibleMovesList.push({i:x, j:y})
+                }
                 break
             }
             x++
@@ -80,8 +82,10 @@ class Bishop {
             if (board[x][y] == null){
                 possibleMovesList.push({i:x, j:y})
             }
-            else if  (board[x][y].color === this.color){
-                possibleMovesList.push({i:x, j:y})
+            else{
+                if (board[x][y].color !== this.color){
+                    possibleMovesList.push({i:x, j:y})
+                }
                 break
             }
             x++
@@ -93,8 +97,10 @@ class Bishop {
             if (board[x][y] == null){
                 possibleMovesList.push({i:x, j:y})
             }
-            else if  (board[x][y].color === this.color){
-                possibleMovesList.push({i:x, j:y})
+            else{
+                if (board[x][y].color !== this.color){
+                    possibleMovesList.push({i:x, j:y})
+                }
                 break
             }
             x--
@@ -106,8 +112,10 @@ class Bishop {
             if (board[x][y] == null){
                 possibleMovesList.push({i:x, j:y})
             }
-            else if  (board[x][y].color === this.color){
-                possibleMovesList.push({i:x, j:y})
+            else{
+                if (board[x][y].color !== this.color){
+                    possibleMovesList.push({i:x, j:y})
+                }
                 break
             }
             x--
@@ -129,56 +137,96 @@ class Knight{
         this.img.src = `img/${this.color}Knight.png`;
     }
     possibleMoves(){
+        let x = this.j
+        let y = this.i
         let possibleMovesList = []
-        if (this.j + 1 < 8 && this.i + 2 < 8){
-            if (board[this.j + 1][this.i + 2] && board[this.j + 1][this.i + 2].color !== this.color
-            || !board[this.j + 1][this.i + 2]) {
-                possibleMovesList.push({i:this.j + 1, j:this.i + 2})
+        let arr = [{i: x + 1, j: y + 2}, {i: x + 2, j: y + 1}, {i: x - 1, j: y - 2}, {i: x - 2, j: y - 1},
+            {i: x + 1, j: y - 2}, {i: x + 2, j: y - 1}, {i: x - 1, j: y + 2}, {i: x - 2, j: y + 1}]
+        for (let a = 0; a < 8; a++){
+            if (arr[a].i >= 0 && arr[a].j >= 0 && arr[a].i < 8 && arr[a].j < 8) {
+                if (!board[arr[a].i][arr[a].j] || board[arr[a].i][arr[a].j].color !== this.color){
+                    possibleMovesList.push(arr[a])
+                }
             }
         }
-        if (this.j + 2 < 8 && this.i + 1 < 8){
-            if (board[this.j + 2][this.i + 1] && board[this.j + 2][this.i + 1].color !== this.color
-                || !board[this.j + 2][this.i + 1]) {
-                possibleMovesList.push({i:this.j + 2, j:this.i + 1})
-            }
-        }
-        if (this.j - 1 >= 0 && this.i - 2 >= 0){
-            if (board[this.j - 1][this.i - 2] && board[this.j - 1][this.i - 2].color !== this.color
-                || !board[this.j - 1][this.i - 2]) {
-                possibleMovesList.push({i:this.j - 1, j:this.i - 2})
-            }
-        }
-        if (this.j - 2 >= 0 && this.i - 1 >= 0){
-            if (board[this.j - 2][this.i - 1] && board[this.j - 2][this.i - 1].color !== this.color
-                || !board[this.j - 2][this.i - 1]) {
-                possibleMovesList.push({i:this.j - 2, j:this.i - 1})
-            }
-        }
-        if (this.j + 1 < 8 && this.i - 2 >= 0){
-            if (board[this.j + 1][this.i - 2] && board[this.j + 1][this.i - 2].color !== this.color
-                || !board[this.j + 1][this.i - 2]) {
-                possibleMovesList.push({i:this.j + 1, j:this.i - 2})
-            }
-        }
-        if (this.j + 2 < 8 && this.i - 1 >= 0){
-            if (board[this.j + 2][this.i - 1] && board[this.j + 2][this.i - 1].color !== this.color
-                || !board[this.j + 2][this.i - 1]) {
-                possibleMovesList.push({i:this.j + 2, j:this.i - 1})
-            }
-        }
-        if (this.j - 1 >= 0 && this.i + 2 < 8){
-            if (board[this.j - 1][this.i + 2] && board[this.j - 1][this.i + 2].color !== this.color
-                || !board[this.j - 1][this.i + 2]) {
-                possibleMovesList.push({i:this.j - 1, j:this.i + 2})
-            }
-        }
-        if (this.j - 2 >= 0 && this.i + 1 < 8){
-            if (board[this.j - 2][this.i + 1] && board[this.j - 2][this.i + 1].color !== this.color
-                || !board[this.j - 2][this.i + 1]) {
-                possibleMovesList.push({i:this.j - 2, j:this.i + 1})
-            }
-        }
+        // if (this.j + 1 < 8 && this.i + 2 < 8){
+        //     if (board[this.j + 1][this.i + 2] && board[this.j + 1][this.i + 2].color !== this.color
+        //     || !board[this.j + 1][this.i + 2]) {
+        //         possibleMovesList.push({i:this.j + 1, j:this.i + 2})
+        //     }
+        // }
+        // if (this.j + 2 < 8 && this.i + 1 < 8){
+        //     if (board[this.j + 2][this.i + 1] && board[this.j + 2][this.i + 1].color !== this.color
+        //         || !board[this.j + 2][this.i + 1]) {
+        //         possibleMovesList.push({i:this.j + 2, j:this.i + 1})
+        //     }
+        // }
+        // if (this.j - 1 >= 0 && this.i - 2 >= 0){
+        //     if (board[this.j - 1][this.i - 2] && board[this.j - 1][this.i - 2].color !== this.color
+        //         || !board[this.j - 1][this.i - 2]) {
+        //         possibleMovesList.push({i:this.j - 1, j:this.i - 2})
+        //     }
+        // }
+        // if (this.j - 2 >= 0 && this.i - 1 >= 0){
+        //     if (board[this.j - 2][this.i - 1] && board[this.j - 2][this.i - 1].color !== this.color
+        //         || !board[this.j - 2][this.i - 1]) {
+        //         possibleMovesList.push({i:this.j - 2, j:this.i - 1})
+        //     }
+        // }
+        // if (this.j + 1 < 8 && this.i - 2 >= 0){
+        //     if (board[this.j + 1][this.i - 2] && board[this.j + 1][this.i - 2].color !== this.color
+        //         || !board[this.j + 1][this.i - 2]) {
+        //         possibleMovesList.push({i:this.j + 1, j:this.i - 2})
+        //     }
+        // }
+        // if (this.j + 2 < 8 && this.i - 1 >= 0){
+        //     if (board[this.j + 2][this.i - 1] && board[this.j + 2][this.i - 1].color !== this.color
+        //         || !board[this.j + 2][this.i - 1]) {
+        //         possibleMovesList.push({i:this.j + 2, j:this.i - 1})
+        //     }
+        // }
+        // if (this.j - 1 >= 0 && this.i + 2 < 8){
+        //     if (board[this.j - 1][this.i + 2] && board[this.j - 1][this.i + 2].color !== this.color
+        //         || !board[this.j - 1][this.i + 2]) {
+        //         possibleMovesList.push({i:this.j - 1, j:this.i + 2})
+        //     }
+        // }
+        // if (this.j - 2 >= 0 && this.i + 1 < 8){
+        //     if (board[this.j - 2][this.i + 1] && board[this.j - 2][this.i + 1].color !== this.color
+        //         || !board[this.j - 2][this.i + 1]) {
+        //         possibleMovesList.push({i:this.j - 2, j:this.i + 1})
+        //     }
+        // }
         return possibleMovesList
     }
-
+}
+class Queen{
+    constructor(x, y, color) {
+        this.j = x;
+        this.i =y;
+        this.x = x*canvas.width/8;
+        this.y = y*canvas.width/8;
+        this.width = canvas.width/8;
+        this.color = color;
+        this.img = new Image();
+        this.img.src = `img/${this.color}Queen.png`;
+    }
+    possibleMoves(){
+        let bishop = new Bishop(this.j, this.i, this.color)
+        let rook = new Rook(this.j, this.i, this.color)
+        return bishop.possibleMoves().concat(rook.possibleMoves())
+    }
+}
+class Pawn{
+    constructor(x, y, color) {
+        this.j = x;
+        this.i =y;
+        this.x = x*canvas.width/8;
+        this.y = y*canvas.width/8;
+        this.width = canvas.width/8;
+        this.color = color;
+        this.firstTurn = true
+        this.img = new Image();
+        this.img.src = `img/${this.color}Queen.png`;
+    }
 }
