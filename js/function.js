@@ -225,8 +225,76 @@ class Pawn{
         this.y = y*canvas.width/8;
         this.width = canvas.width/8;
         this.color = color;
-        this.firstTurn = true
         this.img = new Image();
         this.img.src = `img/${this.color}Queen.png`;
     }
+    possibleMoves(){
+        let movesList = []
+        if(this.color === 'white'){
+           if(validCell(this.j - 1, this.i) && !board[this.j - 1][this.i]){
+               movesList.push({i: this.j - 1, j: this.i})
+           }
+           if(this.j === 6){
+               movesList.push({i: this.j - 2, j: this.i})
+           }
+           if(validCell(this.j - 1, this.i - 1) && board[this.j - 1][this.i - 1] &&
+               board[this.j - 1][this.i - 1].color === 'black'){
+               movesList.push({i: this.j - 1, j: this.i - 1})
+           }
+           if(validCell(this.j - 1, this.i + 1) && board[this.j - 1][this.i + 1] &&
+               board[this.j - 1][this.i + 1].color === 'black'){
+               movesList.push({i: this.j - 1, j: this.i + 1})
+           }
+       }
+        if(this.color === 'black'){
+            if(validCell(this.j + 1, this.i) && !board[this.j + 1][this.i]){
+                movesList.push({i: this.j + 1, j: this.i})
+            }
+            if(this.j === 1){
+                movesList.push({i: this.j + 2, j: this.i})
+            }
+            if(validCell(this.j + 1, this.i - 1) && board[this.j + 1][this.i - 1] &&
+                board[this.j + 1][this.i - 1].color === 'black'){
+                movesList.push({i: this.j + 1, j: this.i - 1})
+            }
+            if(validCell(this.j + 1, this.i + 1) && board[this.j + 1][this.i + 1] &&
+                board[this.j + 1][this.i + 1].color === 'black'){
+                movesList.push({i: this.j + 1, j: this.i + 1})
+            }
+        }
+        return movesList
+    }
+}
+class King {
+    constructor(x, y, color) {
+        this.j = x;
+        this.i =y;
+        this.x = x*canvas.width/8;
+        this.y = y*canvas.width/8;
+        this.width = canvas.width/8;
+        this.color = color;
+        this.img = new Image();
+        this.img.src = `img/${this.color}Queen.png`;
+    }
+    possibleMoves(){
+       let movesList = []
+       let arr = [{i: this.j + 1, j: this.i + 1}, {i: this.j + 1, j: this.i - 1}, {i: this.j - 1, j: this.i + 1},
+           {i: this.j - 1, j: this.i - 1}, {i: this.j, j: this.j + 1}, {i: this.j, j: this.j - 1},
+           {i: this.j - 1, j: this.i}, {i: this.j + 1, j: this.i}]
+        for(let a = 0; a < 8; a++){
+            if(validCell(arr[a].i, arr[a].j) &&
+                (!board[arr[a].i][arr[a].j] || board[arr[a].i][arr[a].j].color !== this.color)){
+                movesList.push(arr[a])
+            }
+        }
+        return movesList
+    }
+
+}
+function validCell(x, y){
+    let res = false
+    if (x >= 0 && x < 8 && y >= 0 && y < 8){
+        res = true
+    }
+    return res
 }
