@@ -1,14 +1,23 @@
 `use strict`
 
+function drawImage(obj){
+    ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.width);
+};
+function constructorTemplate(z, i, j, color) {
+    z.i = i;
+    z.j = j;
+    z.x = j*canvas.width/8;
+    z.y = i*canvas.width/8;
+    z.width = canvas.width/8;
+    z.height = z.width;
+    z.color = color;
+    z.speed = 5;
+    z.img = new Image();
+};
+
 class Rook{
-    constructor(x, y, color) {
-        this.i = y;
-        this.j =x;
-        this.x = x*canvas.width/8;
-        this.y = y*canvas.width/8;
-        this.width = canvas.width/8;
-        this.color = color;
-        this.img = new Image();
+    constructor(i, j, color) {
+        constructorTemplate(this, i, j, color)
         this.img.src = `img/${this.color}Rook.png`;
     }
     possibleMoves(){
@@ -49,14 +58,8 @@ class Rook{
     }
 }
 class Bishop {
-    constructor(x, y, color) {
-        this.j = x;
-        this.i =y;
-        this.x = x*canvas.width/8;
-        this.y = y*canvas.width/8;
-        this.width = canvas.width/8;
-        this.color = color;
-        this.img = new Image();
+    constructor(i, j, color) {
+        constructorTemplate(this, i, j, color)
         this.img.src = `img/${this.color}Bishop.png`;
     }
     possibleMoves(){
@@ -126,14 +129,8 @@ class Bishop {
     }
 }
 class Knight{
-    constructor(x, y, color) {
-        this.j = x;
-        this.i =y;
-        this.x = x*canvas.width/8;
-        this.y = y*canvas.width/8;
-        this.width = canvas.width/8;
-        this.color = color;
-        this.img = new Image();
+    constructor(i, j, color) {
+        constructorTemplate(this, i, j, color)
         this.img.src = `img/${this.color}Knight.png`;
     }
     possibleMoves(){
@@ -201,14 +198,8 @@ class Knight{
     }
 }
 class Queen{
-    constructor(x, y, color) {
-        this.j = x;
-        this.i =y;
-        this.x = x*canvas.width/8;
-        this.y = y*canvas.width/8;
-        this.width = canvas.width/8;
-        this.color = color;
-        this.img = new Image();
+    constructor(i, j, color) {
+        constructorTemplate(this, i, j, color)
         this.img.src = `img/${this.color}Queen.png`;
     }
     possibleMoves(){
@@ -218,34 +209,28 @@ class Queen{
     }
 }
 class Pawn{
-    constructor(x, y, color) {
-        this.j = x;
-        this.i =y;
-        this.x = x*canvas.width/8;
-        this.y = y*canvas.width/8;
-        this.width = canvas.width/8;
-        this.color = color;
-        this.img = new Image();
+    constructor(i, j, color) {
+        constructorTemplate(this, i, j, color)
         this.img.src = `img/${this.color}Queen.png`;
     }
     possibleMoves(){
         let movesList = []
         if(this.color === 'white'){
-           if(validCell(this.j - 1, this.i) && !board[this.j - 1][this.i]){
-               movesList.push({i: this.j - 1, j: this.i})
-           }
-           if(this.j === 6){
-               movesList.push({i: this.j - 2, j: this.i})
-           }
-           if(validCell(this.j - 1, this.i - 1) && board[this.j - 1][this.i - 1] &&
-               board[this.j - 1][this.i - 1].color === 'black'){
-               movesList.push({i: this.j - 1, j: this.i - 1})
-           }
-           if(validCell(this.j - 1, this.i + 1) && board[this.j - 1][this.i + 1] &&
-               board[this.j - 1][this.i + 1].color === 'black'){
-               movesList.push({i: this.j - 1, j: this.i + 1})
-           }
-       }
+            if(validCell(this.j - 1, this.i) && !board[this.j - 1][this.i]){
+                movesList.push({i: this.j - 1, j: this.i})
+            }
+            if(this.j === 6){
+                movesList.push({i: this.j - 2, j: this.i})
+            }
+            if(validCell(this.j - 1, this.i - 1) && board[this.j - 1][this.i - 1] &&
+                board[this.j - 1][this.i - 1].color === 'black'){
+                movesList.push({i: this.j - 1, j: this.i - 1})
+            }
+            if(validCell(this.j - 1, this.i + 1) && board[this.j - 1][this.i + 1] &&
+                board[this.j - 1][this.i + 1].color === 'black'){
+                movesList.push({i: this.j - 1, j: this.i + 1})
+            }
+        }
         if(this.color === 'black'){
             if(validCell(this.j + 1, this.i) && !board[this.j + 1][this.i]){
                 movesList.push({i: this.j + 1, j: this.i})
@@ -266,21 +251,15 @@ class Pawn{
     }
 }
 class King {
-    constructor(x, y, color) {
-        this.j = x;
-        this.i =y;
-        this.x = x*canvas.width/8;
-        this.y = y*canvas.width/8;
-        this.width = canvas.width/8;
-        this.color = color;
-        this.img = new Image();
+    constructor(i, j, color) {
+        constructorTemplate(this, i, j, color)
         this.img.src = `img/${this.color}Queen.png`;
     }
     possibleMoves(){
-       let movesList = []
-       let arr = [{i: this.j + 1, j: this.i + 1}, {i: this.j + 1, j: this.i - 1}, {i: this.j - 1, j: this.i + 1},
-           {i: this.j - 1, j: this.i - 1}, {i: this.j, j: this.j + 1}, {i: this.j, j: this.j - 1},
-           {i: this.j - 1, j: this.i}, {i: this.j + 1, j: this.i}]
+        let movesList = []
+        let arr = [{i: this.j + 1, j: this.i + 1}, {i: this.j + 1, j: this.i - 1}, {i: this.j - 1, j: this.i + 1},
+            {i: this.j - 1, j: this.i - 1}, {i: this.j, j: this.j + 1}, {i: this.j, j: this.j - 1},
+            {i: this.j - 1, j: this.i}, {i: this.j + 1, j: this.i}]
         for(let a = 0; a < 8; a++){
             if(validCell(arr[a].i, arr[a].j) &&
                 (!board[arr[a].i][arr[a].j] || board[arr[a].i][arr[a].j].color !== this.color)){
